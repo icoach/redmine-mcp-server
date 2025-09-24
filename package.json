@@ -1,6 +1,6 @@
 {
   "name": "@icoach/redmine-mcp-server",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A Model Context Protocol (MCP) server for Redmine API integration",
   "type": "module",
   "main": "dist/index.js",
@@ -32,7 +32,7 @@
     "integration"
   ],
   "author": "icoach",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.7.0",
     "cors": "^2.8.5",
