@@ -9,7 +9,6 @@
  * Required environment variables:
  * - REDMINE_URL
  * - REDMINE_API_KEY
- * - MCP_API_KEY
  * - REDMINE_DEFAULT_PROJECT_ID (optional)
  * - TEST_PROJECT_ID (for tests)
  */
@@ -45,14 +44,10 @@ class MCPTestClient {
 
   async start() {
     return new Promise((resolve, reject) => {
-      this.process = spawn(
-        "node",
-        [serverPath, "--api-key", process.env.MCP_API_KEY],
-        {
-          stdio: ["pipe", "pipe", "pipe"],
-          env: process.env,
-        }
-      );
+      this.process = spawn("node", [serverPath], {
+        stdio: ["pipe", "pipe", "pipe"],
+        env: process.env,
+      });
 
       this.process.stderr.on("data", (data) => {
         console.error(`Server stderr: ${data}`);

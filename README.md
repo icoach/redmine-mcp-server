@@ -19,7 +19,7 @@ A Model Context Protocol (MCP) server that provides comprehensive integration wi
 ### NPX Installation (Recommended)
 
 ```bash
-npx @icoach/redmine-mcp-server --api-key YOUR_MCP_API_KEY
+npx @icoach/redmine-mcp-server
 ```
 
 ### MCP Configuration
@@ -31,7 +31,7 @@ Add this to your MCP configuration:
   "mcpServers": {
     "redmine": {
       "command": "npx", 
-      "args": ["@icoach/redmine-mcp-server@latest", "--api-key", "YOUR_MCP_API_KEY"],
+      "args": ["@icoach/redmine-mcp-server@latest"],
       "env": {
         "REDMINE_URL": "https://your-redmine-instance.com",
         "REDMINE_API_KEY": "YOUR_REDMINE_API_KEY",
@@ -47,8 +47,7 @@ Add this to your MCP configuration:
 
 ### Required
 - `REDMINE_URL`: Your Redmine instance URL
-- `REDMINE_API_KEY`: Your Redmine API key  
-- `MCP_API_KEY`: MCP server API key (or use `--api-key` flag)
+- `REDMINE_API_KEY`: Your Redmine API key
 
 ### Optional  
 - `REDMINE_DEFAULT_PROJECT_ID`: Default project for issue creation
@@ -186,7 +185,7 @@ Get comprehensive metadata including projects, trackers, statuses, users, and pr
 
 5. Run in development mode:
    ```bash
-   npm run dev -- --api-key YOUR_KEY
+   npm run dev
    ```
 
 ### Testing

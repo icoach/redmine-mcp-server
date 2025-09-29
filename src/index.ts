@@ -8,21 +8,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { RedmineClient } from "./redmine-api.js";
 
-// CLI args and required MCP API key
-const args = process.argv.slice(2);
-const getArgValue = (flag: string): string | undefined => {
-  const index = args.indexOf(flag);
-  return index !== -1 ? args[index + 1] : undefined;
-};
-
-const SERVER_API_KEY = process.env.MCP_API_KEY || getArgValue("--api-key");
-
-if (!SERVER_API_KEY) {
-  console.error(
-    "Missing required MCP API key. Provide via --api-key or MCP_API_KEY env."
-  );
-  process.exit(1);
-}
+// No CLI args processing needed
 
 // Get configuration
 const REDMINE_URL = process.env.REDMINE_URL;
