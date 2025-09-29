@@ -2,10 +2,6 @@
 
 A Model Context Protocol (MCP) server that provides comprehensive integration with Redmine, enabling AI assistants to interact with your Redmine instance through a clean, validated API.
 
-## ⚠️ Beta Period Notice
-
-**This MCP server is currently free during the beta period.** After the beta period concludes, this service will transition to a paid model. Enjoy full access to all features while we refine and improve the service based on your feedback.
-
 ## Features
 
 - **Complete Issue Lifecycle**: Create, read, update, transition issues
@@ -231,4 +227,4 @@ npm publish --access public  # Publishes to npm
 
 ## License
 
-ISC License - see LICENSE file for details.
+MIT License - see LICENSE file for details.
