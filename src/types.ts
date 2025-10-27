@@ -94,6 +94,14 @@ export interface CreateIssueParams {
   assigned_to_id?: number;
   start_date?: string;
   due_date?: string;
+  parent_issue_id?: number;
+  fixed_version_id?: number;
+  category_id?: number;
+  estimated_hours?: number;
+  done_ratio?: number;
+  custom_fields?: CustomField[];
+  watcher_user_ids?: number[];
+  notes?: string;
 }
 
 export interface UpdateIssueParams {
@@ -105,6 +113,14 @@ export interface UpdateIssueParams {
   assigned_to_id?: number;
   start_date?: string;
   due_date?: string;
+  parent_issue_id?: number;
+  fixed_version_id?: number;
+  category_id?: number;
+  estimated_hours?: number;
+  done_ratio?: number;
+  custom_fields?: CustomField[];
+  watcher_user_ids?: number[];
+  notes?: string;
 }
 
 export interface SearchIssuesParams {
@@ -122,4 +138,29 @@ export interface RedmineConfig {
   apiKey: string;
   timeout?: number;
   insecureTls?: boolean;
+}
+
+export interface CustomField {
+  id: number;
+  value: string | string[] | number;
+}
+
+export interface RedmineVersion {
+  id: number;
+  name: string;
+  description?: string;
+  status: string;
+  due_date?: string;
+  sharing: string;
+  created_on: string;
+  updated_on: string;
+}
+
+export interface RedmineCategory {
+  id: number;
+  name: string;
+  assigned_to?: {
+    id: number;
+    name: string;
+  };
 }

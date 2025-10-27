@@ -60,6 +60,21 @@ server.tool(
     assigned_to_id: z.number().optional(),
     start_date: z.string().optional(),
     due_date: z.string().optional(),
+    parent_issue_id: z.number().optional(),
+    fixed_version_id: z.number().optional(),
+    category_id: z.number().optional(),
+    estimated_hours: z.number().optional(),
+    done_ratio: z.number().optional(),
+    custom_fields: z
+      .array(
+        z.object({
+          id: z.number(),
+          value: z.union([z.string(), z.number(), z.array(z.string())]),
+        })
+      )
+      .optional(),
+    watcher_user_ids: z.array(z.number()).optional(),
+    notes: z.string().optional(),
   },
   async (_params) => {
     try {
@@ -115,6 +130,21 @@ server.tool(
     assigned_to_id: z.number().optional(),
     start_date: z.string().optional(),
     due_date: z.string().optional(),
+    parent_issue_id: z.number().optional(),
+    fixed_version_id: z.number().optional(),
+    category_id: z.number().optional(),
+    estimated_hours: z.number().optional(),
+    done_ratio: z.number().optional(),
+    custom_fields: z
+      .array(
+        z.object({
+          id: z.number(),
+          value: z.union([z.string(), z.number(), z.array(z.string())]),
+        })
+      )
+      .optional(),
+    watcher_user_ids: z.array(z.number()).optional(),
+    notes: z.string().optional(),
   },
   async ({ issue_id, ...params }) => {
     try {
@@ -355,6 +385,65 @@ server.tool(
       return {
         content: [
           { type: "text", text: JSON.stringify(updatedIssue.issue, null, 2) },
+        ],
+      };
+    } catch (error) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: `Error: ${
+              error instanceof Error ? error.message : String(error)
+            }`,
+          },
+        ],
+        isError: true,
+      };
+    }
+  }
+);
+
+// Get project versions (milestones)
+server.tool(
+  "get_project_versions",
+  { project_id: z.number() },
+  async ({ project_id }) => {
+    try {
+      const response = await redmineClient.getProjectVersions(project_id);
+      return {
+        content: [
+          { type: "text", text: JSON.stringify(response.versions, null, 2) },
+        ],
+      };
+    } catch (error) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: `Error: ${
+              error instanceof Error ? error.message : String(error)
+            }`,
+          },
+        ],
+        isError: true,
+      };
+    }
+  }
+);
+
+// Get project categories
+server.tool(
+  "get_project_categories",
+  { project_id: z.number() },
+  async ({ project_id }) => {
+    try {
+      const response = await redmineClient.getProjectCategories(project_id);
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(response.issue_categories, null, 2),
+          },
         ],
       };
     } catch (error) {

@@ -6,6 +6,8 @@ import {
   RedmineUser,
   RedminePriority,
   RedmineUpload,
+  RedmineVersion,
+  RedmineCategory,
   CreateIssueParams,
   UpdateIssueParams,
   SearchIssuesParams,
@@ -121,6 +123,20 @@ export class RedmineClient {
   // Issue Priorities
   async getIssuePriorities(): Promise<{ issue_priorities: RedminePriority[] }> {
     return this.request("enumerations/issue_priorities.json", "GET");
+  }
+
+  // Project Versions (Milestones)
+  async getProjectVersions(
+    projectId: number
+  ): Promise<{ versions: RedmineVersion[] }> {
+    return this.request(`projects/${projectId}/versions.json`, "GET");
+  }
+
+  // Project Categories
+  async getProjectCategories(
+    projectId: number
+  ): Promise<{ issue_categories: RedmineCategory[] }> {
+    return this.request(`projects/${projectId}/issue_categories.json`, "GET");
   }
 
   // Binary Upload for attachments
