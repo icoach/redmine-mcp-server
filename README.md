@@ -45,15 +45,39 @@ Add this to your MCP configuration:
 
 ## Environment Variables
 
-### Required
+### Configuration Priority
+
+The server supports two ways to configure environment variables:
+
+1. **Local `.env` file** (highest priority) - Place a `.env` file in your project root
+2. **MCP config `env` section** (fallback) - Define in your MCP configuration
+
+If a local `.env` file exists in your project directory, its values will override the MCP config variables.
+
+### Required Variables
 - `REDMINE_URL`: Your Redmine instance URL
 - `REDMINE_API_KEY`: Your Redmine API key
 
-### Optional  
+### Optional Variables
 - `REDMINE_DEFAULT_PROJECT_ID`: Default project for issue creation
 - `REDMINE_TIMEOUT_MS`: Request timeout in milliseconds (default: 30000)
 - `REDMINE_INSECURE_TLS`: Allow insecure TLS connections (default: false)
 - `LOG_LEVEL`: Logging level (for future use)
+
+### Using Local `.env` File
+
+Create a `.env` file in your project root:
+
+```bash
+REDMINE_URL=https://your-redmine-instance.com
+REDMINE_API_KEY=your_api_key_here
+REDMINE_DEFAULT_PROJECT_ID=123
+```
+
+This approach is useful when:
+- You want project-specific Redmine configurations
+- You don't want to modify global MCP settings
+- You're working with multiple projects with different Redmine instances
 
 ## Available Tools
 

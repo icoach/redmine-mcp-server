@@ -5,7 +5,16 @@ const MCP_REDMINE_API_KEY = process.env.REDMINE_API_KEY;
 
 // Load environment variables from .env file with override
 import dotenv from "dotenv";
-dotenv.config({ override: true });
+import path from "path";
+
+// Try to load .env from current working directory (user's project)
+const envPath = path.join(process.cwd(), ".env");
+const result = dotenv.config({ path: envPath, override: true });
+
+// Optional: Log .env loading status (comment out in production if needed)
+if (!result.error) {
+  console.error(`[Redmine MCP] Loaded local .env from ${envPath}`);
+}
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
