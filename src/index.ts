@@ -1,7 +1,11 @@
 #!/usr/bin/env node
-// Load environment variables from .env file
+// Store MCP config values as fallbacks before loading .env
+const MCP_REDMINE_URL = process.env.REDMINE_URL;
+const MCP_REDMINE_API_KEY = process.env.REDMINE_API_KEY;
+
+// Load environment variables from .env file with override
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ override: true });
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
@@ -10,9 +14,9 @@ import { RedmineClient } from "./redmine-api.js";
 
 // No CLI args processing needed
 
-// Get configuration
-const REDMINE_URL = process.env.REDMINE_URL;
-const REDMINE_API_KEY = process.env.REDMINE_API_KEY;
+// Get configuration - prioritize .env, fallback to MCP config
+const REDMINE_URL = process.env.REDMINE_URL || MCP_REDMINE_URL;
+const REDMINE_API_KEY = process.env.REDMINE_API_KEY || MCP_REDMINE_API_KEY;
 const DEFAULT_PROJECT_ID_RAW = process.env.REDMINE_DEFAULT_PROJECT_ID;
 const DEFAULT_PROJECT_ID =
   DEFAULT_PROJECT_ID_RAW !== undefined && DEFAULT_PROJECT_ID_RAW !== ""
